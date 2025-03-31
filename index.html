@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AR.js Example with Custom Pattern</title>
+    <title>AR Academia</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
-<body style="margin : 0; overflow: hidden;">
+<body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
-        <a-marker type='pattern' url='https://raw.githubusercontent.com/FutureBread6512/3DModelTest/refs/heads/main/academiaINK.patt'>
+        <a-marker id="a-marker" type='pattern' url='https://raw.githubusercontent.com/FutureBread6512/3DModelTest/refs/heads/main/academiaINK.patt'>
             <a-entity 
+                id="academiaINK"
                 gltf-model="url(https://raw.githubusercontent.com/FutureBread6512/3DModelTest/main/model.gltf)" 
                 scale="1 1 1" 
                 position="0 1 0">
@@ -16,5 +17,21 @@
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        const marker = document.querySelector("a-marker");
+        const model = document.querySelector('#academiaINK');
+        
+        let lastKnownPosition = { x: 0, y: 1, z: 0 };
+        
+        marker.addEventListener("markerFound", () => {
+            lastKnownPosition = marker.getAttribute("position");
+            model.setAttribute("position", lastKnownPosition);
+        });
+
+        marker.addEventListener("markerLost", () => {
+            model.setAttribute("position", lastKnownPosition);
+        });
+    </script>
 </body>
 </html>
