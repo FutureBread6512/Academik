@@ -17,21 +17,5 @@
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-        const marker = document.querySelector("a-marker");
-        const model = document.querySelector('#academiaINK');
-        
-        let lastKnownPosition = { x: 0, y: 1, z: 0 };
-        
-        marker.addEventListener("markerFound", () => {
-            lastKnownPosition = marker.getAttribute("position");
-            model.setAttribute("position", lastKnownPosition);
-        });
-
-        marker.addEventListener("markerLost", () => {
-            model.setAttribute("position", lastKnownPosition);
-        });
-    </script>
 </body>
 </html>
