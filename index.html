@@ -11,11 +11,22 @@
             <a-entity 
                 id="academiaINK"
                 gltf-model="url(https://raw.githubusercontent.com/FutureBread6512/3DModelTest/main/model.gltf)" 
-                scale="1 1 1" 
-                position="0 1 0">
+                scale="0 0 0" 
+                position="0 0 0" 
+                rotation="-90 0 0"
+                animation__appear="property: scale; from: 0 0 0; to: 1 1 1; dur: 2000; easing: easeInOutQuad; startEvents: appear"
+               >
             </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        const model = document.querySelector('#academiaINK');
+        
+        document.querySelector('a-marker').addEventListener('markerFound', () => {
+            model.emit('appear');
+        });
+    </script>
 </body>
 </html>
